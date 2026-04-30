@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="KB">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="application-name" content="KB">
+<title>KB BIZ 티타늄 트래커</title>
+<!-- PWA 아이콘 (아이폰/안드로이드 홈화면용) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEwMCIgZmlsbD0iIzBBMEEwQSIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSI0NzIiIHJ4PSI4NSIgZmlsbD0iIzFhMTIwMCIvPgogIDxyZWN0IHg9IjIyIiB5PSIyMiIgd2lkdGg9IjQ2OCIgaGVpZ2h0PSI0NjgiIHJ4PSI4MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzlBODRDIiBzdHJva2Utd2lkdGg9IjYiLz4KICA8dGV4dCB4PSI5NSIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMjAiIGZpbGw9IndoaXRlIj5LPC90ZXh0PgogIDx0ZXh0IHg9IjI2OCIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMjAiIGZpbGw9IiNGRkQ3MDAiPkI8L3RleHQ+Cjwvc3ZnPgo=">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEwMCIgZmlsbD0iIzBBMEEwQSIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSI0NzIiIHJ4PSI4NSIgZmlsbD0iIzFhMTIwMCIvPgogIDxyZWN0IHg9IjIyIiB5PSIyMiIgd2lkdGg9IjQ2OCIgaGVpZ2h0PSI0NjgiIHJ4PSI4MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzlBODRDIiBzdHJva2Utd2lkdGg9IjYiLz4KICA8dGV4dCB4PSI5NSIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMjAiIGZpbGw9IndoaXRlIj5LPC90ZXh0PgogIDx0ZXh0IHg9IjI2OCIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMjAiIGZpbGw9IiNGRkQ3MDAiPkI8L3RleHQ+Cjwvc3ZnPgo=">
+<!-- PWA manifest 인라인 -->
+<script>
+const manifestData = {
+  name: "KB BIZ 티타늄 트래커",
+  short_name: "KB",
+  start_url: "./",
+  display: "standalone",
+  background_color: "#0A0A0A",
+  theme_color: "#0A0A0A",
+  orientation: "portrait",
+  icons: [
+    { src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEwMCIgZmlsbD0iIzBBMEEwQSIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSI0NzIiIHJ4PSI4NSIgZmlsbD0iIzFhMTIwMCIvPgogIDxyZWN0IHg9IjIyIiB5PSIyMiIgd2lkdGg9IjQ2OCIgaGVpZ2h0PSI0NjgiIHJ4PSI4MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzlBODRDIiBzdHJva2Utd2lkdGg9IjYiLz4KICA8dGV4dCB4PSI5NSIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMjAiIGZpbGw9IndoaXRlIj5LPC90ZXh0PgogIDx0ZXh0IHg9IjI2OCIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMjAiIGZpbGw9IiNGRkQ3MDAiPkI8L3RleHQ+Cjwvc3ZnPgo=", sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+  ]
+};
+const blob = new Blob([JSON.stringify(manifestData)], {type:'application/json'});
+const murl = URL.createObjectURL(blob);
+const link = document.createElement('link');
+link.rel = 'manifest'; link.href = murl;
+document.currentScript.after(link);
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0A; --card:#141414; --card2:#1a1a1a;
+  --border:#222; --border2:#2e2e2e;
+  --text:#F5F5F5; --muted:#777; --muted2:#3a3a3a;
+  --yellow:#FFD700; --gold:#E0A830;
+  --green:#5BF5A0; --red:#FF6B6B;
+  --t1:#E0A830; --t2:#FFD700;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;overscroll-behavior:none;}
+.app{display:flex;flex-direction:column;height:100dvh;max-width:480px;margin:0 auto;}
+
+/* TOP BAR */
+.top-bar{flex-shrink:0;padding-top:calc(env(safe-area-inset-top,0px)+14px);padding-bottom:12px;padding-left:18px;padding-right:18px;background:var(--bg);border-bottom:1px solid var(--border);}
+.top-inner{display:flex;align-items:center;justify-content:space-between;}
+.top-brand{font-size:10px;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace;}
+.top-title{font-size:18px;font-weight:900;color:var(--yellow);}
+.month-badge{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:5px 12px;font-size:12px;font-family:'Space Mono',monospace;color:var(--gold);}
+
+/* TAB */
+.tab-nav{flex-shrink:0;display:flex;background:var(--bg);border-bottom:1px solid var(--border);}
+.tab-btn{flex:1;padding:11px 0;background:none;border:none;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn.on{color:var(--yellow);border-bottom-color:var(--yellow);font-weight:700;}
+
+/* SCROLL */
+.scroll-body{flex:1;overflow-y:auto;padding:14px 16px calc(env(safe-area-inset-bottom,0px)+20px);-webkit-overflow-scrolling:touch;}
+.tab-panel{display:none;} .tab-panel.on{display:block;}
+
+/* BLOCK */
+.block{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:16px;margin-bottom:12px;}
+.sec-label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
+
+/* 구간 선택 버튼 */
+.tier-select-wrap{display:flex;gap:10px;margin-bottom:0;}
+.tier-sel-btn{
+  flex:1;border-radius:14px;padding:16px 8px;text-align:center;
+  border:2px solid var(--border2);background:var(--card2);
+  cursor:pointer;transition:all .25s;
+}
+.tier-sel-btn:active{transform:scale(.97);}
+.tier-sel-btn.on.t1{border-color:var(--t1);background:rgba(224,168,48,.1);box-shadow:0 0 16px rgba(224,168,48,.15);}
+.tier-sel-btn.on.t2{border-color:var(--t2);background:rgba(255,215,0,.1);box-shadow:0 0 16px rgba(255,215,0,.2);}
+.tsb-emoji{font-size:26px;margin-bottom:6px;}
+.tsb-label{font-size:13px;font-weight:700;margin-bottom:3px;}
+.t1 .tsb-label{color:var(--t1);}
+.t2 .tsb-label{color:var(--t2);}
+.tsb-range{font-size:10px;color:var(--muted);}
+.tsb-check{font-size:11px;font-weight:700;margin-top:5px;height:16px;}
+.t1 .tsb-check{color:var(--t1);}
+.t2 .tsb-check{color:var(--t2);}
+.tier-sel-btn:not(.on) .tsb-label{color:var(--muted);}
+.tier-sel-btn:not(.on) .tsb-emoji{filter:grayscale(0.5);opacity:.6;}
+
+/* 진행 바 */
+.prog-wrap{margin-top:14px;}
+.prog-track{height:7px;background:#1a1a1a;border-radius:4px;overflow:hidden;margin-bottom:6px;}
+.prog-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1),background .5s;}
+.prog-info{display:flex;justify-content:space-between;align-items:center;}
+.prog-label{font-size:11px;color:var(--muted);}
+.prog-amt{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--yellow);}
+
+/* SPEND */
+.spend-box{display:flex;align-items:center;gap:6px;background:var(--card2);border:1.5px solid var(--border2);border-radius:12px;padding:12px 14px;transition:border-color .2s;overflow:hidden;}
+.spend-box:focus-within{border-color:var(--gold);}
+.won{font-size:16px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.spend-input{flex:1;min-width:0;background:none;border:none;outline:none;font-size:20px;font-weight:700;font-family:'Space Mono',monospace;color:var(--text);text-align:right;width:100%;}
+.spend-input::placeholder{color:#2a2a2a;}
+.wan-tag{font-size:11px;color:var(--muted);flex-shrink:0;white-space:nowrap;}
+
+/* CAT */
+.cat-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);}
+.cat-row:last-child{border-bottom:none;padding-bottom:0;}
+.cat-icon-wrap{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+/* 밝은 아이콘 배경색 */
+.ic-oil  {background:rgba(255,180,0,.15);}
+.ic-mart {background:rgba(100,220,255,.12);}
+.ic-ishop{background:rgba(200,130,255,.12);}
+.ic-util {background:rgba(100,200,100,.12);}
+.ic-omall{background:rgba(80,160,255,.12);}
+.ic-fran {background:rgba(255,140,80,.12);}
+.cat-info{flex:1;min-width:0;}
+.cat-name{font-size:12px;font-weight:700;margin-bottom:2px;color:var(--text);}
+.cat-hint{font-size:10px;color:var(--muted);line-height:1.4;}
+.cat-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
+.cat-inp-row{display:flex;align-items:center;gap:4px;}
+.cat-inp{background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:7px 10px;width:95px;text-align:right;font-family:'Space Mono',monospace;font-size:13px;color:var(--text);outline:none;transition:border-color .2s;}
+.cat-inp:focus{border-color:var(--gold);}
+.cat-unit{font-size:10px;color:var(--muted);}
+.cat-pts{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--green);}
+.cat-pts.z{color:var(--muted2);}
+.cat-lim{font-size:9px;color:var(--gold);min-height:12px;}
+
+/* SUMMARY */
+.sum-wrap{background:linear-gradient(135deg,#130f00,#0d0d0d);border:1px solid var(--gold);border-radius:16px;padding:16px;margin-bottom:12px;}
+.sum-title{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1c1700;font-size:12px;}
+.sum-row:last-of-type{border-bottom:none;}
+.sum-lbl{color:var(--muted);display:flex;align-items:center;gap:6px;}
+.sum-val{font-family:'Space Mono',monospace;font-weight:700;}
+.sum-val.z{color:var(--muted2);}
+.sum-total{margin-top:12px;padding-top:12px;border-top:1px solid var(--gold);display:flex;justify-content:space-between;align-items:flex-end;}
+.sum-total-label{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:5px;}
+.tier-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;}
+.chip-t1{background:rgba(224,168,48,.12);color:var(--t1);border:1px solid rgba(224,168,48,.35);}
+.chip-t2{background:rgba(255,215,0,.12);color:var(--yellow);border:1px solid rgba(255,215,0,.45);}
+.sum-total-val{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:var(--yellow);}
+
+/* PARSE TAB */
+.parse-area{width:100%;min-height:100px;background:var(--card2);border:1.5px solid var(--border2);border-radius:12px;padding:13px 14px;font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;line-height:1.6;transition:border-color .2s;}
+.parse-area:focus{border-color:var(--gold);}
+.parse-area::placeholder{color:#333;font-size:12px;line-height:1.7;}
+.parse-btn{width:100%;margin-top:8px;background:linear-gradient(135deg,var(--gold),var(--yellow));border:none;border-radius:12px;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;color:#000;padding:13px;cursor:pointer;transition:opacity .2s,transform .1s;}
+.parse-btn:active{opacity:.85;transform:scale(.99);}
+.parsed-card{background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:13px 14px;margin-bottom:8px;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.parsed-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.parsed-store{font-size:14px;font-weight:700;}
+.parsed-amount{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--yellow);}
+.parsed-meta{font-size:10px;color:var(--muted);margin-bottom:10px;}
+.parsed-cat-row{display:flex;align-items:center;gap:8px;}
+.cat-select-label{font-size:11px;color:var(--muted);flex-shrink:0;}
+.cat-select{flex:1;background:#1e1e1e;border:1px solid var(--border2);border-radius:8px;padding:6px 10px;font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--text);outline:none;appearance:none;-webkit-appearance:none;}
+.apply-one-btn{background:var(--card);border:1px solid var(--gold);border-radius:8px;padding:6px 12px;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:700;color:var(--gold);cursor:pointer;flex-shrink:0;transition:all .2s;}
+.apply-one-btn:active{background:var(--gold);color:#000;}
+.apply-all-btn{width:100%;margin-top:4px;background:var(--card);border:1px solid var(--green);border-radius:12px;padding:12px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:700;color:var(--green);cursor:pointer;transition:all .2s;}
+.apply-all-btn:active{background:var(--green);color:#000;}
+
+/* HISTORY */
+.history-empty{text-align:center;color:var(--muted);font-size:12px;padding:30px 0;}
+.hist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);animation:fadeIn .3s ease;}
+.hist-item:last-child{border-bottom:none;}
+.hist-icon-wrap{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.hist-body{flex:1;min-width:0;}
+.hist-store{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hist-meta{font-size:10px;color:var(--muted);margin-top:1px;}
+.hist-right{text-align:right;flex-shrink:0;}
+.hist-amt{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--text);}
+.hist-pts{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--green);margin-top:2px;}
+.hist-pts.z{color:var(--muted2);}
+.hist-del{background:none;border:none;color:var(--muted2);font-size:16px;cursor:pointer;padding:4px;flex-shrink:0;}
+.hist-del:active{color:var(--red);}
+.hist-summary{display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;border-top:1px solid var(--border2);margin-top:4px;}
+.hist-sum-label{font-size:11px;color:var(--muted);}
+.hist-sum-val{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--yellow);}
+
+.notice{background:#0e0e0e;border:1px solid var(--border);border-radius:11px;padding:11px 13px;font-size:10px;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+.notice strong{color:var(--gold);}
+.reset-btn{width:100%;background:none;border:1px solid var(--border2);border-radius:11px;color:var(--muted);font-family:'Noto Sans KR',sans-serif;font-size:13px;padding:12px;cursor:pointer;transition:all .2s;margin-bottom:6px;}
+.reset-btn:active{border-color:var(--red);color:var(--red);}
+.toast{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+20px);left:50%;transform:translateX(-50%) translateY(20px);background:#222;border:1px solid var(--border2);border-radius:20px;padding:9px 18px;font-size:12px;color:var(--text);opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:999;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="top-bar">
+    <div class="top-inner">
+      <div>
+        <div class="top-brand">KB국민카드</div>
+        <div class="top-title">BIZ 티타늄 트래커</div>
+      </div>
+      <div class="month-badge" id="monthBadge"></div>
+    </div>
+  </div>
+
+  <div class="tab-nav">
+    <button class="tab-btn on" onclick="switchTab('main',this)">📊 실적·혜택</button>
+    <button class="tab-btn" onclick="switchTab('parse',this)">📲 알림 입력</button>
+    <button class="tab-btn" onclick="switchTab('history',this)">🧾 내역</button>
+  </div>
+
+  <div class="scroll-body">
+
+    <!-- ══ 실적·혜택 탭 ══ -->
+    <div class="tab-panel on" id="tab_main">
+
+      <!-- 구간 선택 -->
+      <div class="block">
+        <div class="sec-label">실적 구간 선택</div>
+        <div class="tier-select-wrap">
+          <div class="tier-sel-btn t1" id="tsb1" onclick="selectTier(1)">
+            <div class="tsb-emoji">🥈</div>
+            <div class="tsb-label">구간 1</div>
+            <div class="tsb-range">40만 ~ 80만원</div>
+            <div class="tsb-check" id="tcheck1"></div>
+          </div>
+          <div class="tier-sel-btn t2" id="tsb2" onclick="selectTier(2)">
+            <div class="tsb-emoji">🏆</div>
+            <div class="tsb-label">구간 2</div>
+            <div class="tsb-range">80만원 이상</div>
+            <div class="tsb-check" id="tcheck2"></div>
+          </div>
+        </div>
+        <!-- 진행 바 -->
+        <div class="prog-wrap">
+          <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+          <div class="prog-info">
+            <span class="prog-label" id="progLabel">이번 달 실적을 입력하세요</span>
+            <span class="prog-amt" id="progAmt"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 총 실적 -->
+      <div class="block">
+        <div class="sec-label">이번 달 총 실적</div>
+        <div class="spend-box">
+          <span class="won">₩</span>
+          <input class="spend-input" id="totalSpend" type="number" inputmode="numeric" placeholder="0" oninput="onSpendInput()">
+          <span class="wan-tag" id="wanTag"></span>
+        </div>
+      </div>
+
+      <!-- 카테고리 -->
+      <div class="block">
+        <div class="sec-label">카테고리별 사용금액</div>
+
+        <div class="cat-row">
+          <div class="cat-icon-wrap ic-oil">⛽</div>
+          <div class="cat-info"><div class="cat-name">SK·GS 주유</div><div class="cat-hint" id="hint_oil">리터당 110점 · 월 20만원 한도</div></div>
+          <div class="cat-right">
+            <div class="cat-inp-row"><input class="cat-inp" id="oil_l" type="number" inputmode="decimal" placeholder="0" oninput="calc()"><span class="cat-unit">L</span></div>
+            <span class="cat-pts z" id="pts_oil">0점</span><span class="cat-lim" id="lim_oil"></span>
+          </div>
+        </div>
+
+        <div class="cat-row">
+          <div class="cat-icon-wrap ic-mart">🛒</div>
+          <div class="cat-info"><div class="cat-name">대형할인점·하나로식자재</div><div class="cat-hint" id="hint_mart">15% 적립 · 1만5천점 한도</div></div>
+          <div class="cat-right">
+            <div class="cat-inp-row"><input class="cat-inp" id="mart" type="number" inputmode="numeric" placeholder="0" oninput="calc()"><span class="cat-unit">원</span></div>
+            <span class="cat-pts z" id="pts_mart">0점</span><span class="cat-lim" id="lim_mart"></span>
+          </div>
+        </div>
+
+        <div class="cat-row">
+          <div class="cat-icon-wrap ic-ishop">🛍️</div>
+          <div class="cat-info"><div class="cat-name">6대 인터넷쇼핑몰</div><div class="cat-hint" id="hint_ishop">15% 적립 · 1만5천점 한도</div></div>
+          <div class="cat-right">
+            <div class="cat-inp-row"><input class="cat-inp" id="ishop" type="number" inputmode="numeric" placeholder="0" oninput="calc()"><span class="cat-unit">원</span></div>
+            <span class="cat-pts z" id="pts_ishop">0점</span><span class="cat-lim" id="lim_ishop"></span>
+          </div>
+        </div>
+
+        <div class="cat-row">
+          <div class="cat-icon-wrap ic-fran">🏪</div>
+          <div class="cat-info"><div class="cat-name">가맹점 운영지원</div><div class="cat-hint">10% 적립 · 1만점 한도</div></div>
+          <div class="cat-right">
+            <div class="cat-inp-row"><input class="cat-inp" id="fran" type="number" inputmode="numeric" placeholder="0" oninput="calc()"><span class="cat-unit">원</span></div>
+            <span class="cat-pts z" id="pts_fran">0점</span><span class="cat-lim" id="lim_fran"></span>
+          </div>
+        </div>
+
+        <div class="cat-row">
+          <div class="cat-icon-wrap ic-util">📱</div>
+          <div class="cat-info"><div class="cat-name">4대보험·통신·전기수도</div><div class="cat-hint">10% 적립 · 1만점 한도</div></div>
+          <div class="cat-right">
+            <div class="cat-inp-row"><input class="cat-inp" id="util" type="number" inputmode="numeric" placeholder="0" oninput="calc()"><span class="cat-unit">원</span></div>
+            <span class="cat-pts z" id="pts_util">0점</span><span class="cat-lim" id="lim_util"></span>
+          </div>
+        </div>
+
+        <div class="cat-row">
+          <div class="cat-icon-wrap ic-omall">🌐</div>
+          <div class="cat-info"><div class="cat-name">온라인몰</div><div class="cat-hint">10% 적립 · 1만점 한도</div></div>
+          <div class="cat-right">
+            <div class="cat-inp-row"><input class="cat-inp" id="omall" type="number" inputmode="numeric" placeholder="0" oninput="calc()"><span class="cat-unit">원</span></div>
+            <span class="cat-pts z" id="pts_omall">0점</span><span class="cat-lim" id="lim_omall"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 요약 -->
+      <div class="sum-wrap">
+        <div class="sum-title">이번 달 적립 포인트 요약</div>
+        <div class="sum-row"><span class="sum-lbl">⛽ SK·GS 주유</span><span class="sum-val z" id="s_oil">0점</span></div>
+        <div class="sum-row"><span class="sum-lbl">🛒 대형할인점</span><span class="sum-val z" id="s_mart">0점</span></div>
+        <div class="sum-row"><span class="sum-lbl">🛍️ 인터넷쇼핑몰</span><span class="sum-val z" id="s_ishop">0점</span></div>
+        <div class="sum-row"><span class="sum-lbl">🏪 가맹점 운영지원</span><span class="sum-val z" id="s_fran">0점</span></div>
+        <div class="sum-row"><span class="sum-lbl">📱 보험·통신·공과금</span><span class="sum-val z" id="s_util">0점</span></div>
+        <div class="sum-row"><span class="sum-lbl">🌐 온라인몰</span><span class="sum-val z" id="s_omall">0점</span></div>
+        <div class="sum-total">
+          <div>
+            <div class="sum-total-label">총 적립 포인트</div>
+            <div id="chipWrap"></div>
+          </div>
+          <div class="sum-total-val" id="totalPts">0점</div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>💡 주유 한도</strong> · 구간1: 월 20만원(약 111L)·110점/L &nbsp; 구간2: 월 30만원(약 167L)·120점/L<br>
+        <strong>📌 잔여 할인한도</strong> 문의 → KB국민카드 <strong>1588-1688</strong>
+      </div>
+      <button class="reset-btn" onclick="resetAll()">↺ 전체 초기화</button>
+    </div>
+
+    <!-- ══ 알림 입력 탭 ══ -->
+    <div class="tab-panel" id="tab_parse">
+      <div class="block">
+        <div class="sec-label">KB Pay 알림 붙여넣기</div>
+        <textarea class="parse-area" id="parseArea" placeholder="두 가지 형식 모두 붙여넣기 가능해요!
+
+▶ 형식1 (KB Pay 앱 알림)
+[KB Pay 사용 알림] 신용 7055 04/18 20:21 32,000원 우아한형제들 승인
+
+▶ 형식2 (KB국민카드 문자)
+KB국민카드7055승인
+남*재님
+10,030원 일시불
+04/13 14:36
+쿠팡(쿠페이)
+누적654,510원"></textarea>
+        <button class="parse-btn" onclick="parseMsg()">🔍 자동 분석하기</button>
+      </div>
+      <div id="parsedList"></div>
+    </div>
+
+    <!-- ══ 내역 탭 ══ -->
+    <div class="tab-panel" id="tab_history">
+      <div class="block">
+        <div class="sec-label">이번 달 사용 내역</div>
+        <div id="historyList"><div class="history-empty">아직 내역이 없어요<br>📲 알림 탭에서 추가해보세요</div></div>
+      </div>
+      <button class="reset-btn" onclick="clearHistory()">🗑 내역 전체 삭제</button>
+    </div>
+
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ── 월 표시
+document.getElementById('monthBadge').textContent = (new Date().getMonth()+1)+'월 실적';
+
+// ── 탭
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab_'+id).classList.add('on');
+  btn.classList.add('on');
+  if(id==='history') renderHistory();
+}
+
+// ── 구간 데이터 (tier 1, 2만)
+const TIERS = {
+  1:{oil_pts:110,oil_maxL:111,mart_rate:.15,mart_cap:15000,ishop_rate:.15,ishop_cap:15000,other_rate:.10,other_cap:10000},
+  2:{oil_pts:120,oil_maxL:167,mart_rate:.15,mart_cap:20000,ishop_rate:.15,ishop_cap:20000,other_rate:.10,other_cap:10000}
+};
+
+const fmt = n => Math.round(n).toLocaleString('ko-KR');
+
+// 현재 선택된 tier (1 or 2, localStorage 유지)
+let currentTier = parseInt(localStorage.getItem('kb_tier')||'1');
+
+function selectTier(t){
+  currentTier = t;
+  localStorage.setItem('kb_tier', t);
+  // 버튼 UI
+  document.getElementById('tsb1').classList.toggle('on', t===1);
+  document.getElementById('tsb2').classList.toggle('on', t===2);
+  document.getElementById('tcheck1').textContent = t===1 ? '✓ 선택됨' : '';
+  document.getElementById('tcheck2').textContent = t===2 ? '✓ 선택됨' : '';
+  // 힌트 업데이트
+  updateHints();
+  calc();
+}
+
+function updateHints(){
+  const t = TIERS[currentTier];
+  document.getElementById('hint_oil').textContent  = currentTier===2 ? '리터당 120점 · 월 30만원 주유금액 한도' : '리터당 110점 · 월 20만원 주유금액 한도';
+  document.getElementById('hint_mart').textContent = currentTier===2 ? '15% 적립 · 2만점 한도' : '15% 적립 · 1만5천점 한도';
+  document.getElementById('hint_ishop').textContent= currentTier===2 ? '15% 적립 · 2만점 한도' : '15% 적립 · 1만5천점 한도';
+}
+
+// ── 총 실적 입력 핸들러
+function onSpendInput(){
+  calc();
+}
+
+// ── 포인트 계산 (tier 직접 받음)
+function calcPtsForItem(cat, amount, tier){
+  const t = TIERS[tier];
+  if(!t) return 0;
+  if(cat==='oil'){
+    const liters = amount/1800;
+    return Math.round(Math.min(liters * t.oil_pts, t.oil_pts * t.oil_maxL));
+  }
+  const rateMap={mart:t.mart_rate,ishop:t.ishop_rate,fran:t.other_rate,util:t.other_rate,omall:t.other_rate};
+  const capMap ={mart:t.mart_cap, ishop:t.ishop_cap, fran:t.other_cap, util:t.other_cap, omall:t.other_cap};
+  return Math.round(Math.min(amount*(rateMap[cat]??t.other_rate), capMap[cat]??t.other_cap));
+}
+
+function setPoints(ptsId, sumId, raw, cap){
+  const v = Math.min(raw, cap);
+  const txt = fmt(v)+'점';
+  document.getElementById(ptsId).textContent = txt;
+  document.getElementById(sumId).textContent = txt;
+  document.getElementById(ptsId).className = 'cat-pts'+(v===0?' z':'');
+  document.getElementById(sumId).className  = 'sum-val'+(v===0?' z':'');
+  const lEl = document.getElementById(ptsId.replace('pts_','lim_'));
+  if(lEl) lEl.textContent = (raw>cap&&cap>0)?'한도 도달':'';
+  return v;
+}
+
+function calc(){
+  const tier = currentTier;
+  const t = TIERS[tier];
+
+  const spend = parseFloat(document.getElementById('totalSpend').value)||0;
+
+  // wan tag
+  document.getElementById('wanTag').textContent = spend>=10000?(spend/10000).toFixed(1).replace(/\.0$/,'')+'만원':'';
+
+  // 진행 바
+  const target = tier===1 ? 800000 : 999999999;
+  const pct = tier===1 ? Math.min((spend/800000)*100,100) : Math.min((spend/800000)*100,100);
+  const fill = document.getElementById('progFill');
+  fill.style.width = Math.min(pct,100)+'%';
+  fill.style.background = tier===1
+    ? 'linear-gradient(90deg,var(--t1),#f0c040)'
+    : 'linear-gradient(90deg,var(--t1),var(--t2))';
+
+  const pl = document.getElementById('progLabel');
+  const pa = document.getElementById('progAmt');
+  if(tier===1 && spend < 800000){
+    pl.textContent = '구간 2까지 남은 금액';
+    pa.textContent = fmt(800000-spend)+'원';
+  } else if(tier===1 && spend >= 800000){
+    pl.textContent = '🏆 구간 2 달성 가능!';
+    pa.textContent = '';
+  } else {
+    pl.textContent = '🏆 최고 구간 적용 중';
+    pa.textContent = '';
+  }
+
+  // 카테고리별 포인트
+  const oilL  = parseFloat(document.getElementById('oil_l').value)||0;
+  const martA = parseFloat(document.getElementById('mart').value)||0;
+  const ishopA= parseFloat(document.getElementById('ishop').value)||0;
+  const franA = parseFloat(document.getElementById('fran').value)||0;
+  const utilA = parseFloat(document.getElementById('util').value)||0;
+  const omallA= parseFloat(document.getElementById('omall').value)||0;
+
+  const p_oil  = setPoints('pts_oil',  's_oil',  oilL*t.oil_pts,   t.oil_pts*t.oil_maxL);
+  const p_mart = setPoints('pts_mart', 's_mart', martA*t.mart_rate, t.mart_cap);
+  const p_ishop= setPoints('pts_ishop','s_ishop',ishopA*t.ishop_rate,t.ishop_cap);
+  const p_fran = setPoints('pts_fran', 's_fran', franA*t.other_rate, t.other_cap);
+  const p_util = setPoints('pts_util', 's_util', utilA*t.other_rate, t.other_cap);
+  const p_omall= setPoints('pts_omall','s_omall',omallA*t.other_rate,t.other_cap);
+
+  const total = p_oil+p_mart+p_ishop+p_fran+p_util+p_omall;
+  document.getElementById('totalPts').textContent = fmt(total)+'점';
+
+  const cw = document.getElementById('chipWrap');
+  cw.innerHTML = tier===1
+    ? '<span class="tier-chip chip-t1">🥈 구간 1 적용 중</span>'
+    : '<span class="tier-chip chip-t2">🏆 구간 2 최대혜택</span>';
+
+  save();
+}
+
+// ── 카테고리 자동분류
+const CAT_RULES=[
+  {cat:'oil',  icon:'⛽', iconClass:'ic-oil',  label:'SK·GS 주유',      kw:['sk주유','gs주유','sk에너지','gs칼텍스','주유소','오일뱅크','주유']},
+  {cat:'mart', icon:'🛒', iconClass:'ic-mart', label:'대형할인점',       kw:['이마트','롯데마트','홈플러스','하나로마트','하나로클럽','농협하나로','코스트코','트레이더스']},
+  {cat:'ishop',icon:'🛍️',iconClass:'ic-ishop',label:'인터넷쇼핑몰',    kw:['11번가','gmarket','g마켓','옥션','ssg','신세계몰','롯데온','위메프','티몬','인터파크']},
+  {cat:'util', icon:'📱', iconClass:'ic-util', label:'보험·통신·공과금', kw:['sk텔레콤','kt','lg유플','skt','한국전력','kepco','도시가스','수도','건강보험','국민연금','고용보험','통신','보험','전기','가스']},
+  {cat:'omall',icon:'🌐', iconClass:'ic-omall',label:'온라인몰',         kw:['배달의민족','배민','요기요','우아한형제','쿠팡이츠','컬리','오늘의집','무신사','올리브영','카카오','네이버']},
+  {cat:'fran', icon:'🏪', iconClass:'ic-fran', label:'가맹점 운영지원',  kw:['쿠팡','쿠페이']},
+];
+function guessCategory(store){
+  const s=store.toLowerCase().replace(/\s/g,'');
+  for(const r of CAT_RULES){ if(r.kw.some(k=>s.includes(k.replace(/\s/g,'')))) return r; }
+  return CAT_RULES[CAT_RULES.length-1];
+}
+
+// ── KB Pay / KB국민카드 문자 파싱
+// 형식1: [KB Pay 사용 알림] 신용 7055 04/18 20:21 32,000원 우아한형제들 승인
+// 형식2 (여러 줄):
+//   KB국민카드7055승인
+//   남*재님
+//   10,030원 일시불
+//   04/13 14:36
+//   쿠팡(쿠페이)
+//   누적654,510원
+
+function parseMsg(){
+  const raw = document.getElementById('parseArea').value.trim();
+  if(!raw){ showToast('알림 문자를 붙여넣어 주세요!'); return; }
+
+  // 줄 정리 — \r\n, \r, \n, 유니코드 줄바꿈 모두 처리
+  const lines = raw.split(/\r\n|\r|\n|\u2028|\u2029/).map(l=>l.trim());
+  const results = [];
+
+  // ── 형식1: [KB Pay 사용 알림] 한 줄짜리
+  const re1 = /\[KB\s*Pay\s*사용\s*알림\]\s*\S+\s+\d+\s+(\d{2}\/\d{2})\s+(\d{2}:\d{2})\s+([\d,]+)원\s+(.+?)\s+승인/i;
+  lines.forEach(line=>{
+    const m = line.match(re1);
+    if(m){
+      results.push({
+        date: m[1], time: m[2],
+        amount: parseInt(m[3].replace(/,/g,'')),
+        store: m[4].trim(),
+        cat: guessCategory(m[4].trim()).cat
+      });
+    }
+  });
+
+  // ── 형식2: KB국민카드XXXX승인 으로 시작하는 블록
+  // 블록 구조: [0]KB국민카드승인 [1]이름 [2]금액+결제방식 [3]날짜+시간 [4]가게명 [5]누적...
+  let i = 0;
+  while(i < lines.length){
+    if(/KB국민카드\d+승인/i.test(lines[i])){
+      // 빈줄 제외하고 최대 7줄 수집
+      const block = lines.slice(i, i+8).filter(l=>l.length>0);
+      // 금액 줄: 숫자원 + 일시불/할부
+      const amtLine  = block.find(l=>/([\d,]+)원/.test(l) && /(일시불|할부|\d+개월)/.test(l));
+      // 날짜줄: MM/DD HH:MM 포함
+      const dateLine = block.find(l=>/\d{2}\/\d{2}.*\d{2}:\d{2}/.test(l));
+      // 가게명: 날짜줄 다음 줄 (누적 아닌 것)
+      let store = '';
+      if(dateLine){
+        const dateIdx = block.indexOf(dateLine);
+        for(let j=dateIdx+1; j<block.length; j++){
+          if(!/^누적/.test(block[j]) && !/^KB국민/.test(block[j])){
+            store = block[j]; break;
+          }
+        }
+      }
+
+      if(amtLine && dateLine && store){
+        const amtM  = amtLine.match(/([\d,]+)원/);
+        const dateM = dateLine.match(/(\d{2}\/\d{2}).*?(\d{2}:\d{2})/);
+        if(amtM && dateM){
+          const cleanStore = store.replace(/\(.*?\)$/, '').trim() || store;
+          results.push({
+            date: dateM[1], time: dateM[2],
+            amount: parseInt(amtM[1].replace(/,/g,'')),
+            store: cleanStore,
+            cat: guessCategory(cleanStore).cat
+          });
+        }
+      }
+      i += 6;
+      continue;
+    }
+    i++;
+  }
+  if(!results.length){
+    showToast('형식을 인식 못했어요 — 아래 예시 확인!');
+    document.getElementById('parsedList').innerHTML=`<div class="block" style="font-size:11px;color:var(--muted);line-height:1.8">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:8px">📋 붙여넣기 예시</div>
+      <div style="color:#aaa">▶ 형식1 (KB Pay 앱)</div>
+      <div style="background:#1a1a1a;border-radius:8px;padding:8px;margin:4px 0;font-size:10px;color:var(--text)">[KB Pay 사용 알림] 신용 7055 04/18 20:21 32,000원 우아한형제들 승인</div>
+      <div style="color:#aaa;margin-top:8px">▶ 형식2 (SMS 문자)</div>
+      <div style="background:#1a1a1a;border-radius:8px;padding:8px;margin:4px 0;font-size:10px;color:var(--text);line-height:1.9">KB국민카드7055승인<br>남*재님<br>10,030원 일시불<br>04/13 14:36<br>쿠팡(쿠페이)<br>누적654,510원</div>
+    </div>`;
+    return;
+  }
+  window._parsed=results;
+  document.getElementById('parseArea').value='';  // 분석 즉시 초기화
+  const opts=CAT_RULES.map(r=>`<option value="${r.cat}">${r.icon} ${r.label}</option>`).join('');
+  let html='';
+  results.forEach((r,i)=>{
+    const rule=CAT_RULES.find(x=>x.cat===r.cat)||CAT_RULES[CAT_RULES.length-1];
+    html+=`<div class="parsed-card" id="pcard_${i}">
+      <div class="parsed-card-top"><span class="parsed-store">${rule.icon} ${r.store}</span><span class="parsed-amount">${fmt(r.amount)}원</span></div>
+      <div class="parsed-meta">${r.date} ${r.time}</div>
+      <div class="parsed-cat-row">
+        <span class="cat-select-label">카테고리</span>
+        <select class="cat-select" id="pcat_${i}" onchange="window._parsed[${i}].cat=this.value">${opts}</select>
+        <button class="apply-one-btn" onclick="applyOne(${i})">적용</button>
+      </div>
+    </div>`;
+  });
+  if(results.length>1) html+=`<button class="apply-all-btn" onclick="applyAll()">✅ 전체 ${results.length}건 반영하기</button>`;
+  document.getElementById('parsedList').innerHTML=html;
+  results.forEach((r,i)=>{ const s=document.getElementById('pcat_'+i); if(s) s.value=r.cat; });
+  showToast(`${results.length}건 분석 완료! ✅`);
+}
+
+function addToCategory(cat,amount){
+  if(cat==='oil'){
+    const cur=parseFloat(document.getElementById('oil_l').value)||0;
+    document.getElementById('oil_l').value=(cur+(amount/1800)).toFixed(1);
+  } else {
+    const map={mart:'mart',ishop:'ishop',fran:'fran',util:'util',omall:'omall'};
+    const fid=map[cat]||'fran';
+    const cur=parseFloat(document.getElementById(fid).value)||0;
+    document.getElementById(fid).value=cur+amount;
+  }
+}
+
+function applyOne(i){
+  const r=window._parsed[i];
+  r.cat=document.getElementById('pcat_'+i)?.value||r.cat;
+  // ① 총실적 먼저
+  const cur=parseFloat(document.getElementById('totalSpend').value)||0;
+  const newSpend=cur+r.amount;
+  document.getElementById('totalSpend').value=newSpend;
+  // ② 카테고리 DOM
+  addToCategory(r.cat,r.amount);
+  // ③ 포인트 계산
+  const pts=calcPtsForItem(r.cat,r.amount,currentTier);
+  const arr=getHistory();
+  arr.unshift({...r,pts,id:Date.now()});
+  saveHistory(arr);
+  // ④ calc 한 번
+  calc();
+  showToast(`${r.store} 반영! (+${fmt(pts)}점)`);
+  // ⑤ 카드 흐리게 + 완료 표시
+  const card=document.getElementById('pcard_'+i);
+  card.style.opacity='0.35';
+  card.style.pointerEvents='none';
+  card.dataset.done='1';
+  // ⑥ 모든 카드 완료 시 자동 초기화
+  const total = document.querySelectorAll('.parsed-card').length;
+  const done  = document.querySelectorAll('.parsed-card[data-done="1"]').length;
+  if(total > 0 && total === done){
+    setTimeout(()=>{
+      document.getElementById('parseArea').value='';
+      document.getElementById('parsedList').innerHTML='';
+      window._parsed=null;
+    }, 600);
+  }
+}
+
+function applyAll(){
+  const results=window._parsed;
+  if(!results) return;
+  const totalAdded=results.reduce((s,r)=>s+r.amount,0);
+  const cur=parseFloat(document.getElementById('totalSpend').value)||0;
+  document.getElementById('totalSpend').value=cur+totalAdded;
+  const arr=getHistory();
+  results.forEach((r,i)=>{
+    r.cat=document.getElementById('pcat_'+i)?.value||r.cat;
+    addToCategory(r.cat,r.amount);
+    const pts=calcPtsForItem(r.cat,r.amount,currentTier);
+    arr.unshift({...r,pts,id:Date.now()});
+  });
+  saveHistory(arr);
+  calc();
+  showToast(`${results.length}건 전체 반영 완료! 🎉`);
+  document.getElementById('parseArea').value='';
+  document.getElementById('parsedList').innerHTML='';
+  window._parsed=null;
+}
+
+// ── 내역
+function getHistory(){try{return JSON.parse(localStorage.getItem('kb_hist')||'[]');}catch(e){return[];}}
+function saveHistory(arr){localStorage.setItem('kb_hist',JSON.stringify(arr));}
+
+function renderHistory(){
+  const arr=getHistory();
+  const el=document.getElementById('historyList');
+  if(!arr.length){el.innerHTML='<div class="history-empty">아직 내역이 없어요<br>📲 알림 탭에서 추가해보세요</div>';return;}
+  // pts undefined 항목 재계산
+  let updated=false;
+  arr.forEach(r=>{
+    if(r.pts===undefined){ r.pts=calcPtsForItem(r.cat,r.amount,currentTier); updated=true; }
+  });
+  if(updated) saveHistory(arr);
+  const totalAmt=arr.reduce((s,r)=>s+r.amount,0);
+  const totalPts=arr.reduce((s,r)=>s+(r.pts||0),0);
+  const items=arr.map(r=>{
+    const rule=CAT_RULES.find(x=>x.cat===r.cat)||CAT_RULES[CAT_RULES.length-1];
+    const pts=r.pts||0;
+    return `<div class="hist-item">
+      <div class="hist-icon-wrap ${rule.iconClass}">${rule.icon}</div>
+      <div class="hist-body"><div class="hist-store">${r.store}</div><div class="hist-meta">${r.date} ${r.time} · ${rule.label}</div></div>
+      <div class="hist-right">
+        <div class="hist-amt">${fmt(r.amount)}원</div>
+        <div class="hist-pts${pts===0?' z':''}">${pts===0?'혜택없음':'+'+fmt(pts)+'점'}</div>
+      </div>
+      <button class="hist-del" onclick="delHistory(${r.id})">×</button>
+    </div>`;
+  }).join('');
+  el.innerHTML=items+`<div class="hist-summary"><span class="hist-sum-label">총 ${arr.length}건 · ${fmt(totalAmt)}원</span><span class="hist-sum-val">+${fmt(totalPts)}점</span></div>`;
+}
+function delHistory(id){saveHistory(getHistory().filter(r=>r.id!==id));renderHistory();showToast('삭제됨');}
+function clearHistory(){if(confirm('내역을 전체 삭제할까요?')){localStorage.removeItem('kb_hist');renderHistory();showToast('삭제 완료');}}
+
+// ── 토스트
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+// ── 저장/불러오기
+function save(){
+  const d={};
+  ['totalSpend','oil_l','mart','ishop','fran','util','omall'].forEach(id=>{d[id]=document.getElementById(id).value;});
+  localStorage.setItem('kb_biz',JSON.stringify(d));
+}
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem('kb_biz')||'{}');
+    Object.keys(d).forEach(id=>{const el=document.getElementById(id);if(el)el.value=d[id];});
+  }catch(e){}
+}
+function resetAll(){
+  ['totalSpend','oil_l','mart','ishop','fran','util','omall'].forEach(id=>{document.getElementById(id).value='';});
+  localStorage.removeItem('kb_biz');
+  calc();
+  showToast('초기화 완료');
+}
+
+// ── 초기화
+load();
+selectTier(currentTier);
+updateHints();
+calc();
+</script>
+</body>
+</html>
